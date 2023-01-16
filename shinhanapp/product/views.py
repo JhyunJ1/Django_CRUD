@@ -12,6 +12,9 @@ def main(request):
     products = Product.objects.all()
     return render(request, 'product.html', { 'products': products })
 
+def write(request):
+    return render(request, 'product_write.html')
+
 def detail(request, pk):
     product = Product.objects.get(pk=pk)
 
