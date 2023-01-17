@@ -5,15 +5,6 @@
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
         <script src="/static/script.js"></script>
         <link rel="stylesheet" href="/static/styles.css" />
-        <script>
-            $(document).ready(function () {
-              $(".login-form").on("login-submit", function () {
-                let content = $(".ql-editor").html()
-                $("#content").html(content)
-                return true
-              })
-            })
-          </script>
     </head>
     <body>
         <div class="main-title">
@@ -24,23 +15,27 @@
             </div>
         </div>
         <form class="login-form"
-        enctype="multipart/form-data"
         method="post"
-        action="/product/write/"
+        action="/login/"
         >
             {% csrf_token %}
+            <!--아이디-->
             <div class="row mb-3">
                 <label for="user_id" class="col-sm-2 col-form-label">ID</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="user_id" name="user_id">
                 </div>
             </div>
+            
+            <!--비밀번호-->
             <div class="row mb-3">
                 <label for="password" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
                     <input type="password" class="form-control" id="password" name="password">
                 </div>
             </div>
+
+            <!--로그인 버튼-->
             <button type="submit" class="btn btn-primary">Sign in</button>
           </form>
     </body>

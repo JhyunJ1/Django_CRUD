@@ -11,10 +11,18 @@ from .models import Member
 
 def login(request):
     if request.method == 'POST':
-        member = Member(
-            email = request.POST.get("email"),
-            password = requst.POST.get("password"),
-        )
-        member.save()
+        user_id = request.POST.get("user_id")
+        password = request.POST.get("password")
+
+        if Member.objects.filter(user_id=user_id).exists():
+            # 정보 하나를 가져올 때 사용
+            member = Member.objects.get(user_id=user_id)
+
+            # 로그인 성공
+            if member.password == password:
+                request.session['user_pk'] = member.id
+                request.session['user_id'] = member.user_id
+                return redirect('/')
+        
     return render(request,'login.html')
 
