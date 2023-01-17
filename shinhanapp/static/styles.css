@@ -56,3 +56,15 @@ body {
 .modal-body img {
     width: 100%;
 }
+
+.login-form {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.login-title {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+}
