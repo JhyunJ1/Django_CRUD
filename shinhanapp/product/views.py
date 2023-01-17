@@ -20,8 +20,11 @@ def write(request):
             price = request.POST.get("price"),
             location = request.POST.get("location"),
         )
+        # print(product.id) # 저장하기 전에는 반영이 되어 있지 않기 때문에 !에러! 발생
         product.save()
-    return render(request, 'product_write.html')
+    return render('/')
+    # return render(request, 'product_write.html')
+    # return redirect(f'/product/{product.id}')
 
 def detail(request, pk):
     product = Product.objects.get(pk=pk)
