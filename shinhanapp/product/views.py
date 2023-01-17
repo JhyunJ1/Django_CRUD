@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
 from .models import Product
 
@@ -13,6 +13,14 @@ def main(request):
     return render(request, 'product.html', { 'products': products })
 
 def write(request):
+    if request.method == 'POST':
+        product = Product(
+            title = request.POST.get("title"),
+            content = request.POST.get("content"),
+            price = request.POST.get("price"),
+            location = request.POST.get("location"),
+        )
+        product.save()
     return render(request, 'product_write.html')
 
 def detail(request, pk):
