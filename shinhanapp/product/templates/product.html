@@ -11,17 +11,19 @@
             <div class="overlay">
                 <div>
                     <h1>당당마켓</h1>
-                    <span>가장 가까운 중고거래 플랫폼 {{ request.session.user_id }}</span>
+                    <span>가장 가까운 중고거래 플랫폼 {{ request.user.username }}</span>
                 </div>
             </div>
         </div>
         <div class="product-content">
             <div>
-                {% if request.session.user_id  %}
+                {% if request.user.is_authenticated %}
                 <a href="/logout/">Logout</a>
                 {% else %}
-                <a href="/login/">Login</a>
+                <a href="/login/">Login</a> <br/>
+                <a href="/register/">Register</a>
                 {% endif  %}
+                
             </div>
             <div class="list-group list-group-flush">
                 {% for product in products %}

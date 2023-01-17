@@ -13,7 +13,7 @@ def main(request):
     return render(request, 'product.html', { 'products': products })
 
 def write(request):
-    if not request.session.get('user_id'):
+    if not request.user.is_authenticated:
         return redirect('/login/')
 
     if request.method == 'POST':
