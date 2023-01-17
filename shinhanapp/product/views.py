@@ -22,8 +22,8 @@ def write(request):
         )
         # print(product.id) # 저장하기 전에는 반영이 되어 있지 않기 때문에 !에러! 발생
         product.save()
-    return render('/')
-    # return render(request, 'product_write.html')
+    # return render(request, '/')
+    return render(request, 'product_write.html')
     # return redirect(f'/product/{product.id}')
 
 def detail(request, pk):
