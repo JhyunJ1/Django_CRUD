@@ -35,12 +35,12 @@ def detail(request, pk):
         'content': product.content,
         'price': product.price,
         'location': product.location,
+        'image':'/static/bg.jpg'
     }
 
     if product.image:
         ret['image'] = product.image.url
-    else:
-        ret['image'] = '/static/bg.jpg'
+
 
 
     return JsonResponse(ret)
