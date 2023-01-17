@@ -26,3 +26,9 @@ def login(request):
         
     return render(request,'login.html')
 
+def logout(request):
+    del(request.session['user_pk'])
+    del(request.session['user_id'])
+
+    return redirect('/')
+

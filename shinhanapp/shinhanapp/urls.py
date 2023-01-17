@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from product.views import main, detail, write
-from member.views import login
+from member.views import login, logout
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('product/<int:pk>/', detail),
     path('product/write/', write),
     path('login/', login),
+    path('logout/', logout),
     path('', main),
 ]
 

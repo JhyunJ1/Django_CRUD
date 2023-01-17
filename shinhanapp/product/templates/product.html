@@ -16,6 +16,13 @@
             </div>
         </div>
         <div class="product-content">
+            <div>
+                {% if request.session.user_id  %}
+                <a href="/logout/">Logout</a>
+                {% else %}
+                <a href="/login/">Login</a>
+                {% endif  %}
+            </div>
             <div class="list-group list-group-flush">
                 {% for product in products %}
                 <button
@@ -42,9 +49,11 @@
                 {% endfor %}
             </div>
 
+            {% if request.session.user_id %}
             <div class = "text-end mt-3">
                 <a role="button" href="/product/write/" class="btn btn-primary">상품 등록</a>
             </div>
+            {% endif %}
 
         </div>
         <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
