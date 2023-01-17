@@ -7,6 +7,7 @@ $(document).ready(function () {
                 $("#detailModalLocation").text(result.location);
                 $("#detailModalPrice").text(result.price);
                 $("#detailModalContent").text(result.content);
+                $("#detailModalImage").attr("src",result.image);
                 $("#detailModal").modal("show");
             });
     });

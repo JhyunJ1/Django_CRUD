@@ -30,9 +30,17 @@ def write(request):
 def detail(request, pk):
     product = Product.objects.get(pk=pk)
 
-    return JsonResponse({
+    ret = {
         'title': product.title,
         'content': product.content,
         'price': product.price,
         'location': product.location,
-    })
+    }
+
+    if product.image:
+        ret['image'] = product.image.url
+    else:
+        ret['image'] = '/static/bg.jpg'
+
+
+    return JsonResponse(ret)
