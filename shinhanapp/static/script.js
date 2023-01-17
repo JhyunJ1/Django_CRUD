@@ -8,17 +8,9 @@ $(document).ready(function () {
                 $("#detailModalPrice").text(result.price);
                 $("#detailModalContent").html(result.content);
                 $("#detailModalImage").attr("src",result.image);
+                $("#detailModalUsername").text(result.username);
                 $("#detailModal").modal("show");
             });
     });
 });
 
-$(document).ready(function () {
-    $(".login-btn").click(function () {
-        let product_id = $(this).attr('id');
-        $.get("http://127.0.0.1:8000/member/")
-            .then(function (result){
-                pass
-            });
-    });
-});

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
 from .models import Product
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -39,7 +40,8 @@ def detail(request, pk):
         'content': product.content,
         'price': product.price,
         'location': product.location,
-        'image':'/static/bg.jpg'
+        'image': '/static/bg.jpg',
+        'username': product.user.username,
     }
 
     if product.image:
