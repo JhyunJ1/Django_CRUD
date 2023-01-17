@@ -19,6 +19,7 @@ def write(request):
             content = request.POST.get("content"),
             price = request.POST.get("price"),
             location = request.POST.get("location"),
+            image = request.FILES.get("image"),
         )
         # print(product.id) # 저장하기 전에는 반영이 되어 있지 않기 때문에 !에러! 발생
         product.save()

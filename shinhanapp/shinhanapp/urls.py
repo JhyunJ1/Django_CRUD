@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 
 from product.views import main, detail, write
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -25,3 +27,5 @@ urlpatterns = [
     path('product/write/', write),
     path('', main),
 ]
+
+urlpatterns += static("/media/", document_root=settings.MEDIA_ROOT)
