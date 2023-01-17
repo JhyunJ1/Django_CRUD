@@ -9,7 +9,7 @@ from .models import Product
 # 상품 리스트에는 한줄로 상품명, 가격, 장소 나오게 하기
 
 def main(request):
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('-id')
     return render(request, 'product.html', { 'products': products })
 
 def write(request):
@@ -23,7 +23,8 @@ def write(request):
         )
         # print(product.id) # 저장하기 전에는 반영이 되어 있지 않기 때문에 !에러! 발생
         product.save()
-    # return render(request, '/')
+        return redirect('/')
+    # return render(request, 'product.html')
     return render(request, 'product_write.html')
     # return redirect(f'/product/{product.id}')
 
@@ -40,7 +41,6 @@ def detail(request, pk):
 
     if product.image:
         ret['image'] = product.image.url
-
 
 
     return JsonResponse(ret)
