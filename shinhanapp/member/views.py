@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
+from django.contrib.auth.hashers import make_password, check_password
 from .models import Member
 
 # Create your views here.
@@ -19,10 +20,10 @@ def login(request):
             member = Member.objects.get(user_id=user_id)
 
             # 로그인 성공
-            if member.password == password:
+            if check_password(password, member.password):
                 request.session['user_pk'] = member.id
                 request.session['user_id'] = member.user_id
-                return redirect('/')
+                return redirect('/')   
         
     return render(request,'login.html')
 
@@ -31,4 +32,25 @@ def logout(request):
     del(request.session['user_id'])
 
     return redirect('/')
+
+def register(request):
+    if request.method == 'POST':
+        user_id = request.POST.get("user_id"),
+        password = make_password(request.POST.get("password")),
+        name = request.POST.get("name"),
+        age = request.POST.get("age"),
+
+        ## 아이디 중복의 경우
+        if not Member.objects.filter(user_id=user_id).exists():
+            member = Member(
+                user_id = user_id,
+                password = user_id,
+                name = user_id,
+                age = user_id,
+            )
+            member.save()
+            return redirect('/login/')
+    
+    return render(request,'register.html')
+
 
