@@ -8,7 +8,13 @@ from .models import Product
 class ProductListView(APIView):
 
     def post(self, request, *args, **kwargs):
-        pass
+        product = Product(
+            name = request.data['name'],
+            price = request.data['price'],
+            product_type = request.data['product_type'],
+        )
+        product.save()
+        return Response()
 
     def get(self, request, *args, **kwargs):
         product = Product.objects.all().order_by('-id')
