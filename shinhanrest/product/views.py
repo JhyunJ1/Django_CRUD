@@ -24,9 +24,23 @@ class ProductListView(APIView):
         }, status=status.HTTP_201_CREATED)
 
     def get(self, request, *args, **kwargs):
-        product = Product.objects.all().order_by('-id')
-
         ret = []
+        # QuerySet
+        # price
+        product = Product.objects.all()
+        
+        if 'price' in request.query_params:
+            price = request.query_params['price']
+            product = product.filter(price__lte=price)
+
+        if 'name' in request.query_params:
+            name = request.query_params['name']
+            product = product.filter(name__contains=name)
+
+        product = product.order_by('id')
+
+        # name에 전달된 값이 포함된 상품을 검색 (filter)한 결과
+        # 포함된을 표현하는 방법 __contains
 
         for p in product:
             ret.append({
