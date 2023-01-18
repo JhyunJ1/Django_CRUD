@@ -30,6 +30,7 @@ class ProductListView(APIView):
 
         for p in product:
             ret.append({
+                'id': p.id,
                 'name': p.name,
                 'price': p.price,
                 'product_type': p.product_type,
@@ -40,10 +41,25 @@ class ProductListView(APIView):
 
 class ProductDetailView(APIView):
     def delete(self, request, pk, *args, **kwargs):
-        pass
+
+        # 1. 없으면 지워졌다고 거짓말 하기 (204 반환)
+        # 2. 없으면 없다고 반환하기 (404 반환)
+
+        if Product.objects.filter(pk=pk).exists():
+            product = Product.objects.get(pk = pk)
+            product.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def get(self, request, pk,*args, **kwargs) :
-        product = Product.objects.get(pk = pk)
+
+        # 1. get 하기 전에 exists()로 확인하고 가져오기
+        # 2. get 할 때 예외처리 하기
+
+        try:        
+            product = Product.objects.get(pk = pk)
+        except Product.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
         ret = {
             'id': product.id,
