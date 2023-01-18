@@ -40,6 +40,23 @@ class ProductListView(APIView):
         return Response(ret)
 
 class ProductDetailView(APIView):
+    def put(self, request, pk, *args, **kwargs):
+        product = Product.objects.get(pk=pk)
+
+        dirty = False
+        for key, value in request.data.items():
+            # (+) 보안
+            if key not in [f.name for f in product._meta.get_fields()]:
+                continue
+
+            dirty = dirty or value != getattr(product, key)
+            setattr(product, key, value)
+        
+        if dirty:   
+            product.save()
+
+        return Response()
+
     def delete(self, request, pk, *args, **kwargs):
 
         # 1. 없으면 지워졌다고 거짓말 하기 (204 반환)
