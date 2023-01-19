@@ -11,6 +11,12 @@ class ProductListView(
     serializer_class = ProductSerializer
 
     def get_queryset(self):
+        product = Product.filter.all()
+        name = request.query_params.get('name')
+        if name:
+            product = product.filter(name__contains=name)
+        
+        return product.order_by('id')
         
 
     def get(self, request, *args, **kwargs):
