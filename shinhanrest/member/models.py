@@ -12,6 +12,9 @@ class Member(AbstractUser):
             ('휴면', '휴면'),
         )
     )
+
+    REQUIRED_FIELDS= ['tel']
+
     class Meta:
         db_table = 'shinhan_member'
         verbose_name = '회원'
