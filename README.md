@@ -1,7 +1,7 @@
 # 2023-shinhan
 ### Django에서 REST를 썼을 경우 차이점
 
-- url을 나눠써서 코드를 간소화시킴
+- url.py를 app 폴더 안에도 생성해 나눠써 코드를 최적화함
 - app을 생성했을 때 serializers, paginations 파일을 따로 생성
 - **GET, POST 이름으로 함수 생성 시, 자동으로 GET POST 기능에 연결**
 - queryset, pagination, serializer을 get post에서 공유해서 사용
