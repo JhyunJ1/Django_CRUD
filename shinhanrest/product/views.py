@@ -8,23 +8,6 @@ class CommentListView(
         generics.GenericAPIView
     ):
     serializer_class = CommentSerializer
-    #pagination_class = CommentLargePagination
-
-    def get_queryset(self):
-        comment = Comment.objects.all()
-        return comment.order_by('-id')
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, args, kwargs)
-
-
-class CommentDetailView(
-        mixins.RetrieveModelMixin,
-        mixins.DestroyModelMixin,
-        mixins.UpdateModelMixin,
-        generics.GenericAPIView
-    ):
-    serializer_class = CommentSerializer
 
     # 데이터를 가지고 오는 곳
     def get_queryset(self):
@@ -34,7 +17,9 @@ class CommentDetailView(
         return Comment.objects.none()
     
     def get(self, request, *args, **kwargs):
-        return self.retrieve(request, args, kwargs)
+        return self.list(request, args, kwargs)
+
+
     
    
 
