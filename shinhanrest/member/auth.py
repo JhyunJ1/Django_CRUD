@@ -4,6 +4,8 @@ from .models import Member
 class MemberAuth:
 
     def authenticate(self, request, username=None, password=None, *args, **kwargs):
+
+        # 아이디 비번이 있는지 확인
         if not username or not password:
             if request.user.is_authenticated:
                 return request.user
@@ -14,10 +16,9 @@ class MemberAuth:
         except Member.DoesNotExist:
             return None
         
-        if check_password(password, member.password):
-            if member.status == '일반':
+        if member.status == '일반':
+            if check_password(password, member.password):
                 return member
-        
         
         return None
     

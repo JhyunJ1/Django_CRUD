@@ -38,12 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'debug_toolbar',
     'product.apps.ProductConfig',
-    'member.apps.MemberConfig',
+    'member.apps.MemberConfig', # 옵션값을 넣으면서 class 를 사용하고 싶을 때 config 사용
     
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -113,7 +115,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = True # False로 설정해야지 time zone 적용
 
 
 # Static files (CSS, JavaScript, Images)
@@ -126,24 +128,28 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SILENCED_SYSTEM_CHECKS = ['urls.002']
+SILENCED_SYSTEM_CHECKS = ['urls.002'] # / 와 관련된 warning message 
 
 REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination", # 데이터가 많아지면 pagination 사용
     "PAGE_SIZE": 10,
-    "DEFAULT_AUTHENTIACATION_CLASSES": (
+    "DEFAULT_AUTHENTIACATION_CLASSES": ( # jwt 인증 방식 사용(postman에서 serial)
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
 
 import datetime
-SIMPLE_JWT = {
+SIMPLE_JWT = { # jwt 가 동작하는 방식
     # Token의 유효기간 
-    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(hours=2), # 2시간 안에 한
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(days=2), # 2시간 안에 한
     "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=1), # 자동 로그인
     "AUTH_HEADER_TYPES": ("JWT", ),
 }
 AUTH_USER_MODEL = 'member.Member'
 AUTHENTICATION_BACKENDS = [
     "member.auth.MemberAuth"
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]

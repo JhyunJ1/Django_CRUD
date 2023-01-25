@@ -26,5 +26,6 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path('api/product', include('product.urls')),
     path('api/token', TokenObtainPairView.as_view()),
-    
+    path('api/member', include('member.urls')),
+    path('debug/', include('debug_toolbar.urls')),
 ]
