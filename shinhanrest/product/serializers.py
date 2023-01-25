@@ -9,6 +9,7 @@ from member.models import Member
 class ProductSerializer(serializers.ModelSerializer):
     comment_count = serializers.SerializerMethodField()
     like_count = serializers.SerializerMethodField()
+    
 
     def get_comment_count(self, obj): # get_필드명
         
@@ -27,6 +28,9 @@ class ProductSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     product_name = serializers.SerializerMethodField()
     member_username = serializers.SerializerMethodField()
+    tstamp = serializers.DataTimeField(
+        read_only=True, format='%Y-%m-%d %H:%M:%S'
+    )
 
     def get_product_name(self, obj):
         return obj.product.name
