@@ -28,7 +28,7 @@ class ProductSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     product_name = serializers.SerializerMethodField()
     member_username = serializers.SerializerMethodField()
-    tstamp = serializers.DataTimeField(
+    tstamp = serializers.DateTimeField(
         read_only=True, format='%Y-%m-%d %H:%M:%S'
     )
 
