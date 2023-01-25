@@ -55,7 +55,7 @@ class CommentListView(
     def get_queryset(self):
         product_id = self.kwargs['product_id']
         if product_id:
-            return Comment.objects.filter(product_id=product_id).order_by('-id')
+            return Comment.objects.filter(product_id=product_id).select_related('member', 'product').order_by('-id')
         ## Comment.objects.filter(product__pk=1) : product 안에 pk가 1인 상품
         ## Comment.objects.filter(product__product_type='단품') : product 안에 product_type이 단품이 상품
         return Comment.objects.none()
