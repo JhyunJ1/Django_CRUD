@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 class Member(AbstractUser):
     username = models.CharField(max_length=128, unique=True, verbose_name="이름")
     password = models.CharField(max_length=255, verbose_name="비밀번호")
+    passwordcheck = models.CharField(max_length=255, verbose_name="비밀번호확인")
     tel = models.CharField(max_length=32, null=True, blank=True, verbose_name='연락처')
     status = models.CharField(max_length=16, default='일반',
         choices=(
