@@ -8,7 +8,7 @@ class CreateMemberSerializer(serializers.ModelSerializer):
         # 유효성 검사가 끝난 값을 반환 
         if len(value) < 8:
             raise serializers.ValidationError('Too short password')
-        return make_password(password)
+        return make_password(value)
     
     class Meta:
         model = Member
