@@ -16,7 +16,7 @@ class Member(AbstractUser):
         )
     )
 
-    REQUIRED_FIELDS= ['tel']
+    REQUIRED_FIELDS= ['tel'] 
 
     class Meta:
         db_table = 'shinhan_member'
